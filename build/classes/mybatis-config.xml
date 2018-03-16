@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<typeAliases>
+		<typeAlias type="com.chen.model.User" alias="user" />
+		<typeAlias type="com.chen.model.Manager" alias="manager" />
+		<typeAlias type="com.chen.model.Check" alias="check" />
+		<typeAlias type="com.chen.model.Shop" alias="shop" />
+		<typeAlias type="com.chen.model.Goods" alias="goods" />
+		<typeAlias type="com.chen.model.Scar"  alias="scar"/>
+		<typeAlias type="com.chen.model.Address"  alias="address"/>
+	</typeAliases>
+	<mappers>
+		<mapper resource="com/chen/mapper/UserMapper.xml" />
+		<mapper resource="com/chen/mapper/BackMapper.xml" />
+	</mappers>
+
+</configuration>

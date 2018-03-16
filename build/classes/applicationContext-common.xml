@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd"
+	default-lazy-init="true">
+	<!-- 引入外置文件 -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:jdbc.properties" />
+	</bean>
+	<context:annotation-config />
+	<!--数据库连接池配置 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!--指定连接资源 -->
+		<property name="dataSource" ref="dataSource" />
+		<!--指定配置文件 -->
+		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+	</bean>
+	<!-- dao -->
+	<bean id="userDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+		<property name="mapperInterface" value="com.chen.dao.UserDao"></property>
+	</bean>
+	<bean id="backDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+		<property name="mapperInterface" value="com.chen.dao.BackDao"></property>
+	</bean>
+	<!-- action -->
+	<bean id="userAcion" class="com.chen.action.UserAction">
+		<property name="service" ref="userService"></property>
+		<property name="user" ref="user"></property>
+		<property name="back" ref="backService"></property>
+	</bean>
+	<bean id="backAction" class="com.chen.action.BackAction">
+		<property name="manager" ref="manager"></property>
+		<property name="back" ref="backService"></property>
+		<property name="pager" ref="pager"></property>
+		<property name="check" ref="check"></property>
+		<property name="shop" ref="shop"></property>
+		<property name="goods" ref="goods"></property>
+	</bean>
+	<bean id="centerAction" class="com.chen.action.CenterAction">
+		<property name="pager" ref="pager"></property>
+		<property name="back" ref="backService"></property>
+		<property name="scar" ref="scar"></property>
+		<property name="scargoods" ref="scargoods"></property>
+		<property name="scargoodslist" ref="list"></property>
+		<property name="addresslist" ref="list"></property>
+		<property name="user" ref="user"></property>
+		<property name="service" ref="userService"></property>
+		<property name="address" ref="address"></property>
+	</bean>
+	<bean id="list" class="java.util.ArrayList"></bean>
+	<!-- service -->
+	<bean id="userService" class="com.chen.service.impl.UserServiceImpl">
+		<property name="mapper" ref="userDao"></property>
+		<property name="shoplist" ref="list"></property>
+		<property name="goodslist" ref="list"></property>
+		<property name="reclist" ref="list"></property>
+		<property name="hotlist" ref="list"></property>
+		<property name="goodstag" ref="list"></property>
+	</bean>
+	<bean id="backService" class="com.chen.service.impl.BackServiceImpl">
+		<property name="mapper" ref="backDao"></property>
+	</bean>
+	<!-- model -->
+	<bean id="user" class="com.chen.model.User">
+	</bean>
+	<bean id="address" class="com.chen.model.Address">
+	</bean>
+	<bean id="check" class="com.chen.model.Check">
+	</bean>
+	<bean id="codemsg" class="com.chen.model.Codemsg">
+	</bean>
+	<bean id="comment" class="com.chen.model.Comment">
+	</bean>
+	<bean id="complain" class="com.chen.model.Complain">
+	</bean>
+	<bean id="dis" class="com.chen.model.Dis">
+	</bean>
+	<bean id="fav" class="com.chen.model.Fav">
+	</bean>
+	<bean id="goods" class="com.chen.model.Goods">
+	</bean>
+	<bean id="scargoods" class="com.chen.model.ScarGoods">
+	</bean>
+	<bean id="manager" class="com.chen.model.Manager">
+	</bean>
+	<bean id="orders" class="com.chen.model.Orders">
+	</bean>
+	<bean id="scar" class="com.chen.model.Scar">
+	</bean>
+	<bean id="shop" class="com.chen.model.Shop">
+	</bean>
+	<bean id="tag" class="com.chen.model.Tag">
+	</bean>
+	<bean id="tagref" class="com.chen.model.Tagref">
+	</bean>
+	<bean id="vip" class="com.chen.model.Vip">
+	</bean>
+	<bean id="pager" class="com.chen.utils.Pager">
+	</bean>
+</beans>
+
+
+
+
+
+
+
+
+
+

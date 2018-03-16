@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chen.dao.UserDao">
+	<select id="login" parameterType="user" resultType="user">
+		SELECT
+		user_id,user_name,user_pwd,user_pno,user_mail,user_vpoint,user_bla,user_head,user_state
+		FROM tb_user_info WHERE user_mail=#{user_mail} AND
+		user_pwd=#{user_pwd}
+	</select>
+	<select id="check" parameterType="String" resultType="int">
+		SELECT
+		count(*) FROM tb_user_info WHERE user_mail=#{user_mail}
+	</select>
+	<insert id="register" parameterType="user">
+		INSERT INTO tb_user_info
+		(user_id,user_name,user_pwd,user_mail,user_pno) VALUES
+		(#{user_id},#{user_name},#{user_pwd},#{user_mail},#{user_pno})
+	</insert>
+	<update id="updateuser" >
+		update tb_user_info set
+		user_name='${param1}',user_pno='${param3}',user_mail='${param2}',user_head='${param4}' where user_id='${param5}'
+	</update>
+
+
+</mapper>

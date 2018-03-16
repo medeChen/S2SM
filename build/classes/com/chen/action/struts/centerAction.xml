@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC 
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" 
+	"http://struts.apache.org/dtds/struts-2.1.dtd" >
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
+	<package name="center" namespace="/center" extends="json-default,struts-default">
+		<action name="gocenter" class="centerAction" method="gocenter">
+			<result name="success">../center/center.jsp</result>
+		</action>
+		<action name="gouserinfo" class="centerAction" method="gouserinfo">
+			<result name="success">../center/userinfo.jsp</result>
+		</action>
+		<action name="gocart" class="centerAction" method="gocart">
+			<result name="success">
+				../cart/myCart.jsp
+			</result>
+		</action>
+		<action name="gomyshop" class="centerAction" method="gomyshop">
+			<result name="success">../center/shop.jsp</result>
+		</action>
+		<action name="goodsinfo" class="centerAction" method="goodsinfo">
+			<result name="success">../center/goodsinfo.jsp</result>
+		</action>
+		<action name="goaddress" class="centerAction" method="goaddress">
+			<result name="success">../center/addressinfo.jsp</result>
+		</action>
+		<action name="addtocart" class="centerAction" method="addtocart">
+			<result name="success">../cart/myCart.jsp</result>
+		</action>
+	</package>
+</struts>

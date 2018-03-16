@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC 
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" 
+	"http://struts.apache.org/dtds/struts-2.1.dtd" >
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
+
+	<package name="back" namespace="/back" extends="json-default,struts-default">
+
+		<action name="goback" class="backAction" method="goback">
+			<result name="isnull">../back/check.jsp</result>
+			<result name="uncheck">../back/uncheck.jsp</result>
+			<result name="success">../back/index.jsp</result>
+		</action>
+		<action name="goadd" class="backAction" method="goadd">
+			<result name="success">../back/addProduct.jsp</result>
+		</action>
+		<action name="golist" class="backAction" method="golist">
+			<result name="success">../back/productList.jsp</result>
+		</action>
+		<action name="goshopmanager" class="backAction" method="goshopmanager">
+			<result name="success">../back/shopmanager.jsp</result>
+		</action>
+		<action name="updateshop" class="backAction" method="updateshop">
+			<result name="success">../back/shopmanager.jsp</result>
+		</action>
+		<action name="addproduct" class="backAction" method="addproduct">
+			<result name="success">../back/addProduct.jsp</result>
+		</action>
+		<action name="updateproduct" class="backAction" method="updateproduct">
+			<result name="success">../back/productList.jsp</result>
+		</action>
+		<action name="addManager" class="backAction" method="addManager">
+			<result name="success" type="json">
+				<param name="root">state</param>
+			</result>
+		</action>
+		<action name="getlist" class="backAction">
+			<result name="success">
+				../check/admin.jsp
+			</result>
+		</action>
+		<action name="check" class="backAction">
+			<result name="success">
+				../back/uncheck.jsp
+			</result>
+			<result name="check">
+				../check/check.jsp
+			</result>
+		</action>
+	</package>
+</struts>

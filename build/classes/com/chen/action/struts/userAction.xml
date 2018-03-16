@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC 
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" 
+	"http://struts.apache.org/dtds/struts-2.1.dtd" >
+<struts>
+
+	<package name="user" namespace="/user" extends="json-default,struts-default">
+		<action name="loginAction" class="userAcion" method="login">
+			<result name="success">../main/main.jsp</result>
+			<result name="login" type="redirect">
+				../login/login.jsp?tag=1
+			</result>
+			<result name="check">
+				../check/check.jsp
+			</result>
+			<result name="admin">
+				../check/admin.jsp
+			</result>
+		</action>
+		<action name="registerAction" class="userAcion" method="register">
+			<result name="success">
+				../login/login.jsp
+			</result>
+		</action>
+		<action name="getCodeAction" class="userAcion" method="getCode">
+			<result name="success" type="json">
+				<param name="root">state</param>
+			</result>
+			<result name="error">
+				../register/register.jsp
+			</result>
+		</action>
+		<action name="pic" class="userAcion" method="uppic">
+			<result name="success">
+				../index.jsp
+			</result>
+		</action>
+	</package>
+</struts>
